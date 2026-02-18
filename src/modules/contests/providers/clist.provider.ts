@@ -4,7 +4,7 @@ import { ProviderContest } from "../types/contest.types";
 import { config } from "../../../core/env";
 import { log } from "../../../core/logger";
 
-const API_URL = `https://clist.by/api/v4/contest/?upcoming=true&format=json&limit=200&username=unused&api_key=${config.CONTEST_API_KEY}`;
+const API_URL = `https://clist.by/api/v4/contest/?upcoming=true&format=json&limit=200`;
 
 export class ClistProvider implements ContestProvider {
   name = ProviderName.CLIST;
@@ -20,8 +20,12 @@ export class ClistProvider implements ContestProvider {
         const timeout = setTimeout(() => controller.abort(), 10000);
 
         const res = await fetch(API_URL, {
-          signal: controller.signal,
+        signal: controller.signal,
+        headers: {
+            Authorization: `ApiKey ${config.CONTEST_API_KEY}`,
+        },
         });
+
 
         clearTimeout(timeout);
 
