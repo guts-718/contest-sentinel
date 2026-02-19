@@ -4,6 +4,10 @@ import { config } from "./core/env";
 // import { log } from "./core/logger";
 import { connectDB } from "./core/db";
 
+import { sendTelegramMessage } from "./modules/reminders/services/telegram.sender";
+
+sendTelegramMessage("*Test message from contest agent*");
+
 connectDB();
 
 
