@@ -4,6 +4,7 @@ import { startScheduler } from "./scheduler";
 import { log } from "./logger";
 import { registerContestSyncJob } from "../jobs/contestSync.job";
 import { registerUpcomingReminderJob } from "../modules/reminders/jobs/upcomingReminder.job";
+import { registerMorningReminderJob } from "../modules/reminders/jobs/morningReminder.job";
 
 export async function startSystem() {
   try {
@@ -15,6 +16,8 @@ export async function startSystem() {
 
     registerContestSyncJob();
     registerUpcomingReminderJob();
+    registerMorningReminderJob();
+
     
     startScheduler();
 
