@@ -10,6 +10,9 @@ type Config = {
   EMAIL_API_KEY: string;
   CONTEST_API_KEY: string;
   TIMEZONE: string;
+  EMAIL_USER: string;
+  EMAIL_PASS: string;
+
 };
 
 function requireEnv(name: string): string {
@@ -29,4 +32,7 @@ export const config: Config = {
   EMAIL_API_KEY: requireEnv("EMAIL_API_KEY"),
   CONTEST_API_KEY: requireEnv("CONTEST_API_KEY"),
   TIMEZONE: requireEnv("TIMEZONE"),
+  EMAIL_USER: requireEnv("EMAIL_USER"),
+  EMAIL_PASS: requireEnv("EMAIL_PASS")
+
 };
