@@ -19,8 +19,18 @@ export async function runMorningReminders() {
     const contests = await getTodayContests();
 
     if (!contests.length) {
-      log.info("[REMINDER] no contests today");
-      return;
+           const msg =
+          `🌅 *Good Morning*
+
+          No contests today.
+
+          Use this day to practice problems, revise concepts, or upsolve past contests.
+
+          Consistency beats intensity.`;
+
+                await sendTelegramMessage(msg);
+                log.info("[REMINDER] sent no-contest morning message");
+                return;
     }
 
     let message = `📅 *Contests Today*\n\n`;
