@@ -1,6 +1,8 @@
 import cron, { ScheduledTask } from "node-cron";
 import { log } from "./logger";
 
+let schedulerRunning = false;
+
 type Job = {
   name: string;
   schedule: string;
@@ -32,10 +34,17 @@ export function registerJob(job: Job) {
 }
 
 export function startScheduler() {
+  schedulerRunning = true;
   log.cron("Scheduler started");
 }
+
 
 export function stopScheduler() {
   log.cron("Stopping scheduler...");
   jobs.forEach((job) => job.stop());
+}
+
+
+export function isSchedulerRunning() {
+  return schedulerRunning;
 }
