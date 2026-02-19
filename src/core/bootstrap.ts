@@ -3,6 +3,7 @@ import { startServer } from "../server";
 import { startScheduler } from "./scheduler";
 import { log } from "./logger";
 import { registerContestSyncJob } from "../jobs/contestSync.job";
+import { registerUpcomingReminderJob } from "../modules/reminders/jobs/upcomingReminder.job";
 
 export async function startSystem() {
   try {
@@ -13,6 +14,8 @@ export async function startSystem() {
     startServer();
 
     registerContestSyncJob();
+    registerUpcomingReminderJob();
+    
     startScheduler();
 
 
