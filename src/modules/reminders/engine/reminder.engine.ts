@@ -1,8 +1,10 @@
 import { getUpcomingContests, getTodayContests } from "../services/reminder.query";
 import { alreadySent, markSent } from "../services/reminder.dedupe";
-import { sendTelegramMessage } from "../services/telegram.sender";
+// import { sendTelegramMessage } from "../services/telegram.sender";
 import { NotificationType } from "../models/notification.model";
 import { log } from "../../../core/logger";
+import { sendNotification } from "../../notifications/notification.router";
+
 
 function formatTime(date: Date): string {
   return date.toLocaleTimeString([], {
@@ -28,7 +30,7 @@ export async function runMorningReminders() {
 
           Consistency beats intensity.`;
 
-                await sendTelegramMessage(msg);
+                await sendNotification(msg);
                 log.info("[REMINDER] sent no-contest morning message");
                 return;
     }
@@ -48,7 +50,7 @@ export async function runMorningReminders() {
 
     if (message.trim() === "📅 *Contests Today*") return;
 
-    await sendTelegramMessage(message);
+    await sendNotification(message);
   } catch (err: any) {
     log.error("[REMINDER] morning failed: " + err.message);
   }
@@ -73,7 +75,7 @@ Starts at: ${formatTime(c.startTime)}
 
 ${c.url}`;
 
-      await sendTelegramMessage(msg);
+      await sendNotification(msg);
       await markSent(c._id, NotificationType.BEFORE_30_MIN);
     }
 
