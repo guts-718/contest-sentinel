@@ -2,6 +2,7 @@ import { connectDB } from "./db";
 import { startServer } from "../server";
 import { startScheduler } from "./scheduler";
 import { log } from "./logger";
+import { registerContestSyncJob } from "../jobs/contestSync.job";
 
 export async function startSystem() {
   try {
@@ -11,7 +12,9 @@ export async function startSystem() {
 
     startServer();
 
+    registerContestSyncJob();
     startScheduler();
+
 
     log.boot("System started successfully");
   } catch (err: any) {
