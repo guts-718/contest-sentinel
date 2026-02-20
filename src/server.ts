@@ -5,6 +5,7 @@ import { healthHandler } from "./modules/system/health.controller";
 import { testFetchContests } from "./modules/contests/contest.debug";
 import { manualSyncHandler } from "./modules/contests/contest.sync.controller";
 import { syncStatusHandler } from "./modules/contests/sync/sync.status.controller";
+import { getUpcomingContests } from "./modules/contests/contest.controller";
 import cors from "cors";
 import {
   getSettingsHandler,
@@ -29,6 +30,8 @@ export function startServer() {
   app.get("/settings", getSettingsHandler);
   app.patch("/settings", updateSettingsHandler);
 
+  app.get("/contests/upcoming", getUpcomingContests);
+  
   app.listen(config.PORT, () => {
     log.api(`Server running on port ${config.PORT}`);
   });

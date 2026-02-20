@@ -39,7 +39,7 @@ export default function StatusCard() {
     );
 
   return (
-    <div className="p-6 bg-white rounded-2xl shadow space-y-3">
+    <div className="card shadow space-y-3">
       <h2 className="text-xl font-semibold">System Status</h2>
 
       <Row label="Status" value={data.status} />

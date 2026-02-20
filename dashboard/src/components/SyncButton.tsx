@@ -22,26 +22,12 @@ export default function SyncButton() {
   }
 
   return (
-    <div className="p-6 bg-white rounded-2xl shadow space-y-4">
-      <h2 className="text-xl font-semibold">Manual Sync</h2>
-
       <button
         onClick={handleClick}
         disabled={loading}
-        className={`px-5 py-2 rounded-xl font-medium text-white ${
-          loading
-            ? "bg-gray-400"
-            : "bg-blue-600 hover:bg-blue-700"
-        }`}
+        className="hover:cursor-pointer px-4 py-2 rounded-lg font-medium text-white bg-indigo-600 hover:bg-indigo-700 active:scale-95 transition"
       >
         {loading ? "Syncing..." : "Run Sync Now"}
       </button>
-
-      {msg && (
-        <p className="text-sm text-gray-600">
-          {msg}
-        </p>
-      )}
-    </div>
   );
 }
