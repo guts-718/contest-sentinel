@@ -2,6 +2,8 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { api } from "@/src/lib/api";
+import PlatformBadge from "./PlatformBadge";
+import Countdown from "./Countdown";
 
 type Contest = {
   _id: string;
@@ -92,6 +94,7 @@ export default function ContestTable() {
               <th className="py-2">Contest</th>
               <th>Platform</th>
               <th>Start Time</th>
+              <th>Starts In</th>
             </tr>
           </thead>
 
@@ -111,10 +114,12 @@ export default function ContestTable() {
                   </a>
                 </td>
 
-                <td className="capitalize">{c.platform}</td>
-
+              <td><PlatformBadge name={c.platform}/></td>
                 <td>
                   {new Date(c.startTime).toLocaleString()}
+                </td>
+                <td>
+                <Countdown time={c.startTime} />
                 </td>
               </tr>
             ))}

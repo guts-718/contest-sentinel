@@ -2,24 +2,38 @@
 
 import { useState } from "react";
 import { api } from "@/src/lib/api";
+import toast from "react-hot-toast";
 
 export default function SyncButton() {
   const [loading, setLoading] = useState(false);
   const [msg, setMsg] = useState<string | null>(null);
 
-  async function handleClick() {
-    setLoading(true);
-    setMsg(null);
+  // async function handleClick() {
+  //   setLoading(true);
+  //   setMsg(null);
 
-    try {
-      await api.triggerSync();
-      setMsg("Sync completed successfully");
-    } catch (err: any) {
-      setMsg("Sync failed: " + err.message);
-    } finally {
-      setLoading(false);
-    }
+  //   try {
+  //     await api.triggerSync();
+  //     setMsg("Sync completed successfully");
+  //   } catch (err: any) {
+  //     setMsg("Sync failed: " + err.message);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // }
+
+  async function handleClick() {
+  setLoading(true);
+
+  try {
+    await api.triggerSync();
+    toast.success("Sync completed");
+  } catch {
+    toast.error("Sync failed");
+  } finally {
+    setLoading(false);
   }
+}
 
   return (
       <button
