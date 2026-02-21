@@ -15,3 +15,11 @@ export async function getUpcomingContests(_: Request, res: Response) {
     res.status(500).json({ error: err.message });
   }
 }
+
+export async function getAllContests(_: Request, res: Response) {
+  const contests = await ContestModel
+    .find({})
+    .sort({ startTime: 1 });
+
+  res.json(contests);
+}

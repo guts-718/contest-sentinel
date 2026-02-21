@@ -42,9 +42,9 @@ export default function SettingsPanel() {
     );
 
   return (
-    <div className="card shadow space-y-4">
-      <h2 className="text-xl font-semibold">Settings</h2>
-
+    <div className="card space-y-5">
+      <h2 className="text-lg font-semibold tracking-wide">Settings</h2>
+      <div className="space-y-4">
       <Toggle
         label="Telegram Notifications"
         checked={data.telegramEnabled}
@@ -56,7 +56,8 @@ export default function SettingsPanel() {
         checked={data.emailEnabled}
         onChange={v => setData({ ...data, emailEnabled: v })}
       />
-
+      </div>
+      <div className="space-y-4 pt-2 border-t border-[var(--border)]">
       <Input
         label="Email Address"
         value={data.emailAddress}
@@ -68,6 +69,7 @@ export default function SettingsPanel() {
         value={data.timezone}
         onChange={v => setData({ ...data, timezone: v })}
       />
+      </div>
 
       <button
         onClick={save}

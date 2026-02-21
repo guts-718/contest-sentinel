@@ -38,14 +38,15 @@ export default function UpcomingList() {
     );
 
   return (
-    <div className=" card shadow space-y-4">
-      <h2 className="text-xl font-semibold">Upcoming Contests</h2>
+    <div className="card h-full flex flex-col">
+      <h2 className="text-lg font-semibold tracking-wide">Upcoming Contests</h2>
 
       {data.length === 0 && (
         <p className="text-gray-500 text-sm">No contests soon</p>
       )}
 
-      {data.map(c => (
+      <div className="overflow-y-auto pr-2 space-y-3">
+  {data.map(c => (
         <div
           key={c._id}
           className="border rounded-lg p-3 hover:bg-gray-50 transition"
@@ -66,7 +67,9 @@ export default function UpcomingList() {
             {c.platform}
           </div>
         </div>
+
       ))}
+      </div>
     </div>
   );
 }

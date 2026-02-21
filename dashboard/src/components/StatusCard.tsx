@@ -39,8 +39,8 @@ export default function StatusCard() {
     );
 
   return (
-    <div className="card shadow space-y-3">
-      <h2 className="text-xl font-semibold">System Status</h2>
+    <div className="card h-full">
+      <h2 className="text-lg font-semibold tracking-wide">System Status</h2>
 
       <Row label="Status" value={data.status} />
       <Row label="Database" value={data.database} />

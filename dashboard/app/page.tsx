@@ -3,7 +3,7 @@ import SyncButton from "@/src/components/SyncButton";
 import UpcomingList from "@/src/components/UpcomingList";
 import SettingsPanel from "@/src/components/SettingsPanel";
 import ThemeToggle from "@/src/components/ThemeToggle";
-
+import ContestTable from "@/src//components/ContestTable";
 
 export default function Home() {
   return (
@@ -22,21 +22,30 @@ export default function Home() {
       </div>
 
       {/* GRID */}
-      <div className="grid gap-6 lg:grid-cols-3">
+      <div className="grid gap-6">
 
-        <div className="lg:col-span-1">
+  {/* ROW 1 */}
+      <div className="grid lg:grid-cols-2 gap-6 items-stretch">
+
+        <div className="h-[420px]">
           <StatusCard />
         </div>
 
-        <div className="lg:col-span-2">
+        <div className="h-[420px]">
           <UpcomingList />
         </div>
 
-        <div className="lg:col-span-3">
-          <SettingsPanel />
-        </div>
-
       </div>
+
+      {/* ROW 2 */}
+      <div className="flex justify-center">
+        <div className="w-full max-w-2xl">
+          <SettingsPanel />
+          <ContestTable />
+        </div>
+      </div>
+
+    </div>
     </main>
   );
 }

@@ -5,8 +5,9 @@ import { healthHandler } from "./modules/system/health.controller";
 import { testFetchContests } from "./modules/contests/contest.debug";
 import { manualSyncHandler } from "./modules/contests/contest.sync.controller";
 import { syncStatusHandler } from "./modules/contests/sync/sync.status.controller";
-import { getUpcomingContests } from "./modules/contests/contest.controller";
+import { getUpcomingContests, getAllContests } from "./modules/contests/contest.controller";
 import cors from "cors";
+
 import {
   getSettingsHandler,
   updateSettingsHandler,
@@ -24,6 +25,8 @@ export function startServer() {
   app.get("/health", healthHandler);
 
   app.get("/test-contests", testFetchContests);
+
+  app.get("/contests/all", getAllContests);
 
   app.post("/sync", manualSyncHandler);
 
