@@ -2,73 +2,92 @@
 
 import { useEffect, useState } from "react";
 import { api } from "@/src/lib/api";
+import PlatformBadge from "./PlatformBadge";
 
 type Contest = {
   _id: string;
   title: string;
+  platform: string;
   startTime: string;
   url: string;
-  platform: string;
 };
 
 export default function UpcomingList() {
   const [data, setData] = useState<Contest[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  async function load() {
-    try {
-      const res = await api.getUpcoming();
-      setData(res);
-    } finally {
-      setLoading(false);
-    }
-  }
 
   useEffect(() => {
-    load();
-    const id = setInterval(load, 60000);
-    return () => clearInterval(id);
+    api.getUpcoming().then(setData);
   }, []);
 
-  if (loading)
-    return (
-      <div className=" card shadow">
-        Loading contests...
-      </div>
-    );
-
   return (
-    <div className="card h-full flex flex-col">
-      <h2 className="text-lg font-semibold tracking-wide">Upcoming Contests</h2>
+    <div className="space-y-6">
 
-      {data.length === 0 && (
-        <p className="text-gray-500 text-sm">No contests soon</p>
-      )}
+      {/* HEADER */}
+      <h2 className="text-xl font-semibold tracking-tight mb-4">
+        Upcoming Contests
+      </h2>
 
-      <div className="overflow-y-auto pr-2 space-y-3">
-  {data.map(c => (
-        <div
-          key={c._id}
-          className="border rounded-lg p-3 hover:bg-gray-50 transition"
-        >
+      {/* LIST */}
+      <div className="space-y-3">
+
+        {data.map(c => (
           <a
-            href={c.url}
-            target="_blank"
-            className="font-medium text-blue-600"
-          >
-            {c.title}
-          </a>
+  key={c._id}
+  href={c.url}
+  target="_blank"
+  className="
+    group
+    block
+    rounded-xl
+    border border-[var(--border)]
+    px-5 py-4
+    bg-[var(--card)]
+    transition
+    hover:border-indigo-500/60
+    hover:shadow-md
+  "
+>
+  <div className="flex items-center justify-between">
 
-          <div className="text-sm text-gray-500">
-            {new Date(c.startTime).toLocaleString()}
-          </div>
+    {/* LEFT */}
+    <div className="space-y-1 max-w-[70%]">
 
-          <div className="text-xs text-gray-400">
-            {c.platform}
-          </div>
-        </div>
+      <div className="
+        font-medium
+        text-[15px]
+        truncate
+        group-hover:text-indigo-400
+        transition
+      ">
+        {c.title}
+      </div>
 
-      ))}
+      <div className="text-sm text-gray-400">
+        {new Date(c.startTime).toLocaleString()}
+      </div>
+
+    </div>
+
+    {/* RIGHT SIDE */}
+    <div className="flex items-center gap-4">
+
+      <PlatformBadge name={c.platform}/>
+
+      <span className="
+        text-gray-500
+        group-hover:text-indigo-400
+        transition
+        text-lg
+      ">
+        →
+      </span>
+
+    </div>
+
+  </div>
+</a>
+        ))}
+
       </div>
     </div>
   );

@@ -89,41 +89,55 @@ export default function ContestTable() {
 
         <table className="w-full text-sm">
 
-          <thead className="sticky top-0 bg-[var(--card)]">
-            <tr className="text-left border-b border-[var(--border)]">
-              <th className="py-2">Contest</th>
-              <th>Platform</th>
-              <th>Start Time</th>
-              <th>Starts In</th>
-            </tr>
-          </thead>
+          <div className="grid grid-cols-[2.5fr_1fr_1.5fr_1fr] text-sm font-medium border-b border-[var(--border)] pb-2">
+          <div>Contest</div>
+          <div>Platform</div>
+          <div>Start Time</div>
+          <div>Starts In</div>
+        </div>
 
-          <tbody>
-            {filtered.map(c => (
-              <tr
-                key={c._id}
-                className="border-b border-[var(--border)] hover:bg-white/5 transition"
-              >
-                <td className="py-2">
-                  <a
-                    href={c.url}
-                    target="_blank"
-                    className="text-indigo-500 hover:underline"
-                  >
-                    {c.title}
-                  </a>
-                </td>
+    <div className="mt-2 space-y-1">
 
-              <td><PlatformBadge name={c.platform}/></td>
-                <td>
-                  {new Date(c.startTime).toLocaleString()}
-                </td>
-                <td>
-                <Countdown time={c.startTime} />
-                </td>
-              </tr>
-            ))}
-          </tbody>
+      {filtered.map(c=>(
+        <div
+          key={c._id}
+          className="
+            grid grid-cols-[2.5fr_1fr_1.5fr_1fr]
+            items-center
+            px-2 py-2
+            rounded-lg
+            hover:bg-white/5
+            transition
+          "
+        >
+
+        {/* TITLE */}
+        <a
+          href={c.url}
+          target="_blank"
+          className="truncate text-indigo-400 hover:underline"
+          title={c.title}
+        >
+          {c.title}
+        </a>
+
+        {/* PLATFORM */}
+        <div>
+        <PlatformBadge name={c.platform}/>
+        </div>
+
+        {/* TIME */}
+        <div className="text-gray-400 text-sm">
+          {new Date(c.startTime).toLocaleString()}
+        </div>
+
+        {/* COUNTDOWN */}
+        <Countdown time={c.startTime}/>
+
+      </div>
+    ))}
+
+</div>
 
         </table>
 

@@ -1,51 +1,53 @@
+"use client";
+
 import StatusCard from "@/src/components/StatusCard";
 import SyncButton from "@/src/components/SyncButton";
 import UpcomingList from "@/src/components/UpcomingList";
 import SettingsPanel from "@/src/components/SettingsPanel";
 import ThemeToggle from "@/src/components/ThemeToggle";
-import ContestTable from "@/src//components/ContestTable";
-
+import ContestTable from "@/src/components/ContestTable";
+import ContestCalendar from "@/src/components/ContestCalendar";
+import { useReminderListener } from "@/src/components/useReminderListener";
+import NotificationToggle from "@/src/components/NotificationToggle";
+import ReminderListener from "@/src/components/ReminderListener";
+import StatusStrip from "@/src/components/StatusStrip";
+import { useState } from "react";
+import ViewTabs, { View } from "@/src/components/ViewTabs";
+import ViewFrame from "@/src/components/ViewFrame";
 export default function Home() {
+ // useReminderListener();
+ const [view,setView] = useState<View>("upcoming");
   return (
-    <main className="p-8 max-w-7xl mx-auto space-y-8">
+    <main className="px-8 py-6 max-w-7xl mx-auto">
 
-      {/* HEADER */}
-      <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold tracking-tight">
-          Contest Agent Dashboard
-        </h1>
+  <ReminderListener />
 
-        <div className="flex gap-3 items-center">
-          <SyncButton />
-          <ThemeToggle />
-        </div>
-      </div>
+  {/* HEADER */}
+  <div className="flex justify-between items-center mb-6">
+    <h1 className="text-3xl font-bold tracking-tight">
+      Contest Agent Dashboard
+    </h1>
 
-      {/* GRID */}
-      <div className="grid gap-6">
-
-  {/* ROW 1 */}
-      <div className="grid lg:grid-cols-2 gap-6 items-stretch">
-
-        <div className="h-[420px]">
-          <StatusCard />
-        </div>
-
-        <div className="h-[420px]">
-          <UpcomingList />
-        </div>
-
-      </div>
-
-      {/* ROW 2 */}
-      <div className="flex justify-center">
-        <div className="w-full max-w-2xl">
-          <SettingsPanel />
-          <ContestTable />
-        </div>
-      </div>
-
+    <div className="flex gap-3 items-center">
+      <SyncButton />
+      <NotificationToggle />
+      <ThemeToggle />
     </div>
-    </main>
-  );
-}
+  </div>
+
+  <StatusStrip />
+
+  <ViewTabs view={view} setView={setView}/>
+
+  <ViewFrame>
+
+    {view==="upcoming" && <UpcomingList/>}
+    {view==="calendar" && <ContestCalendar/>}
+    {view==="table" && <ContestTable/>}
+
+  </ViewFrame>
+
+</main>
+
+)};
+
