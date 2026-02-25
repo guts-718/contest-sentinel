@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import { api } from "@/src/lib/api";
 import PlatformBadge from "./PlatformBadge";
+import { Settings } from "@/src/types";
+import { formatTime } from "@/src/lib/time";
 
 type Contest = {
   _id: string;
@@ -14,9 +16,18 @@ type Contest = {
 
 export default function UpcomingList() {
   const [data, setData] = useState<Contest[]>([]);
+  const [settings, setSettings]=useState<Settings | null>(null);
+
+  async function load() {
+    const res = await api.getSettings();
+    setSettings(res);
+    console.log("this is the loaded settings: ",settings);
+  }
+
 
   useEffect(() => {
     api.getUpcoming().then(setData);
+    load();
   }, []);
 
   return (
@@ -63,7 +74,7 @@ export default function UpcomingList() {
       </div>
 
       <div className="text-sm text-gray-400">
-        {new Date(c.startTime).toLocaleString()}
+        { formatTime(c.startTime, settings?.timezone)}
       </div>
 
     </div>

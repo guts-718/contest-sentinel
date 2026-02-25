@@ -14,6 +14,8 @@ import StatusStrip from "@/src/components/StatusStrip";
 import { useState } from "react";
 import ViewTabs, { View } from "@/src/components/ViewTabs";
 import ViewFrame from "@/src/components/ViewFrame";
+import SettingsDrawer from "@/src/components/SettingsDrawer";
+
 export default function Home() {
  // useReminderListener();
  const [view,setView] = useState<View>("upcoming");
@@ -32,6 +34,9 @@ export default function Home() {
       <SyncButton />
       <NotificationToggle />
       <ThemeToggle />
+      <SettingsDrawer>
+      <SettingsPanel/>
+    </SettingsDrawer>
     </div>
   </div>
 

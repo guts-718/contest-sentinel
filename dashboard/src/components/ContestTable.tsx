@@ -2,8 +2,11 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { api } from "@/src/lib/api";
+import { formatTime } from "@/src/lib/time";
 import PlatformBadge from "./PlatformBadge";
 import Countdown from "./Countdown";
+import { Settings } from "@/src/types";
+
 
 type Contest = {
   _id: string;
@@ -18,9 +21,17 @@ export default function ContestTable() {
   const [search, setSearch] = useState("");
   const [platform, setPlatform] = useState("all");
   const [sortAsc, setSortAsc] = useState(true);
+  const [settings, setSettings]=useState<Settings | null>(null);
 
+
+  async function load() {
+    const res = await api.getSettings();
+    setSettings(res);
+    console.log("this is the loaded settings: ",settings);
+  }
   useEffect(() => {
     api.getAllContests().then(setData);
+     load();
   }, []);
 
   const filtered = useMemo(() => {
@@ -46,7 +57,7 @@ export default function ContestTable() {
   }, [data, search, platform, sortAsc]);
 
   const platforms = [...new Set(data.map(c => c.platform))];
-
+  console.log("settings: ",settings);
   return (
     <div className="card space-y-4">
 
@@ -87,8 +98,6 @@ export default function ContestTable() {
       {/* TABLE */}
       <div className="overflow-auto max-h-[420px]">
 
-        <table className="w-full text-sm">
-
           <div className="grid grid-cols-[2.5fr_1fr_1.5fr_1fr] text-sm font-medium border-b border-[var(--border)] pb-2">
           <div>Contest</div>
           <div>Platform</div>
@@ -128,19 +137,19 @@ export default function ContestTable() {
 
         {/* TIME */}
         <div className="text-gray-400 text-sm">
-          {new Date(c.startTime).toLocaleString()}
+          { formatTime(c.startTime, settings?.timezone)}
         </div>
 
         {/* COUNTDOWN */}
-        <Countdown time={c.startTime}/>
+        {/* <Countdown time= { formatTime(c.startTime, settings?.timezone)}/> */}
+         <Countdown time= { c.startTime }/> {/*this needs some fixing */}
 
       </div>
     ))}
 
 </div>
 
-        </table>
-
+     
       </div>
     </div>
   );

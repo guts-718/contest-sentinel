@@ -11,7 +11,7 @@ export default function Countdown({ time }: { time: string }) {
     return () => clearInterval(id);
   }, []);
 
-  const diff = target - now;
+  const diff = target - now + (5*60*60 + 30*60)*1000; // this is jogad to add 5:30 need better fix 
 
   if (diff <= 0) return <span className="text-green-400">Live</span>;
 
