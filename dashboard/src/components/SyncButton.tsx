@@ -9,20 +9,6 @@ export default function SyncButton() {
   const [loading, setLoading] = useState(false);
   const [msg, setMsg] = useState<string | null>(null);
 
-  // async function handleClick() {
-  //   setLoading(true);
-  //   setMsg(null);
-
-  //   try {
-  //     await api.triggerSync();
-  //     setMsg("Sync completed successfully");
-  //   } catch (err: any) {
-  //     setMsg("Sync failed: " + err.message);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // }
-
   async function handleClick() {
   setLoading(true);
 
@@ -46,7 +32,7 @@ export default function SyncButton() {
     rounded-lg
     transition
     active:scale-95
-    ${loading ? "cursor-not-allowed bg-indigo-600/30" : "hover:bg-white/5"}
+    ${loading ? "cursor-not-allowed " : "hover:bg-white/5"}
   `}
 >
 

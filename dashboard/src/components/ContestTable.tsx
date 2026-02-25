@@ -27,7 +27,6 @@ export default function ContestTable() {
   async function load() {
     const res = await api.getSettings();
     setSettings(res);
-    console.log("this is the loaded settings: ",settings);
   }
   useEffect(() => {
     api.getAllContests().then(setData);
@@ -57,7 +56,6 @@ export default function ContestTable() {
   }, [data, search, platform, sortAsc]);
 
   const platforms = [...new Set(data.map(c => c.platform))];
-  console.log("settings: ",settings);
   return (
     <div className="card space-y-4">
 

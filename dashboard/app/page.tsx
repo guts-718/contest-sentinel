@@ -15,10 +15,23 @@ import { useState } from "react";
 import ViewTabs, { View } from "@/src/components/ViewTabs";
 import ViewFrame from "@/src/components/ViewFrame";
 import SettingsDrawer from "@/src/components/SettingsDrawer";
+import CommandPalette from "@/src/components/CommandPalette";
+import useHotkey from "@/src/hooks/useHotkey";
+import { createCommands } from "@/src/lib/commands";
+
+
 
 export default function Home() {
  // useReminderListener();
  const [view,setView] = useState<View>("upcoming");
+ const [open,setOpen]=useState(false);
+
+ useHotkey("k",()=>setOpen(true));
+//  const commands = createCommands({
+//   sync:handleSync,
+//   setView:setView,
+//   toggleTheme:toggleTheme
+// });
   return (
     <main className="px-8 py-6 max-w-7xl mx-auto">
 
@@ -51,6 +64,11 @@ export default function Home() {
     {view==="table" && <ContestTable/>}
 
   </ViewFrame>
+  {/* <CommandPalette
+    open={open}
+    setOpen={setOpen}
+    commands={commands}
+/> */}
 
 </main>
 

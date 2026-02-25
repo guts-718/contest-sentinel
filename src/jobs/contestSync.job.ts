@@ -4,7 +4,7 @@ import { runContestSync } from "../modules/contests/sync/contest.sync";
 export function registerContestSyncJob() {
   registerJob({
     name: "contest-sync",
-    schedule: "* * * * *", // for the purpose of testing
+    schedule: "0 */6 * * *", 
    
     task: async () => {
       await runContestSync();
@@ -13,3 +13,4 @@ export function registerContestSyncJob() {
 }
 
 //  schedule: "0 */6 * * *", - this is desired
+//  schedule: "* * * * *", // for the purpose of testing
