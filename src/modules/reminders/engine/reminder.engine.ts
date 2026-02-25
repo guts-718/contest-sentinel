@@ -6,13 +6,22 @@ import { log } from "../../../core/logger";
 import { sendNotification } from "../../notifications/notification.router";
 
 
-function formatTime(date: Date): string {
-  return date.toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit",
+// function formatTime(date: Date): string {
+//   return date.toLocaleTimeString([], {
+//     hour: "2-digit",
+//     minute: "2-digit",
+//   });
+// }
+function formatTime(date:string,tz:string="Asia/Kolkata"){
+  
+  const d = new Date(date.includes("T") ? date : date.replace(" ","T")+"Z");
+  d.setMinutes(d.getMinutes() + 330); // <-- added this line
+  return d.toLocaleString("en-IN",{
+    timeZone: tz,
+    hour12:true,
   });
+ 
 }
-
 /**
  * Sends morning digest
  */

@@ -33,7 +33,7 @@ export async function getTodayContests() {
  */
 export async function getUpcomingContests() {
   const now = new Date();
-  const in30 = new Date(Date.now() + 30 * 60 * 1000);
+  const in30 = new Date(Date.now() + (6*60 * 60 * 1000)); // added 6 hours -- 5:30 for gmt -> ist
 
   return ContestModel.find({
     startTime: {
