@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { requestPermission } from "@/src/lib/notify";
-
+import { Bell, RefreshCw, Sun, Moon } from "lucide-react";
 export default function NotificationToggle() {
   const [enabled, setEnabled] = useState(false);
 
@@ -18,7 +18,8 @@ export default function NotificationToggle() {
         enabled ? "bg-green-600" : "bg-gray-500"
       }`}
     >
-      {enabled ? "Notifications On" : "Enable Notifications"}
+      
+       {enabled ? <Bell  size={18}/> : <Bell size={18}/>}
     </button>
   );
 }

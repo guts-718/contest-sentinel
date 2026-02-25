@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
+import { Sun, Moon } from "lucide-react";
 export default function ThemeToggle() {
   const [dark, setDark] = useState(false);
 
@@ -38,7 +38,7 @@ return (
       transition-colors
     "
   >
-    {dark ? "🌙 Dark" : "☀ Light"}
+    {dark ? <Sun className="text-yellow-300" size={18}/> : <Moon className="text-white-500" size={18}/>}
   </button>
 );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import {Settings} from "lucide-react";
 
 export default function SettingsDrawer({
   children,
@@ -14,9 +15,9 @@ export default function SettingsDrawer({
       {/* BUTTON */}
       <button
         onClick={()=>setOpen(true)}
-        className="px-3 py-2 rounded-lg border border-[var(--border)] hover:bg-white/5 transition"
+        className="icon-btn"
       >
-        ⚙
+        <Settings size={18}/>
       </button>
 
       {/* OVERLAY */}

@@ -51,3 +51,27 @@ body {
   background: #64748b;
   border-radius: 999px;
 }
+
+.icon-btn{
+  @apply p-2 rounded-lg border border-[var(--border)] 
+         hover:bg-white/5 transition flex items-center justify-center;
+}
+
+.icon-btn:hover svg{
+  transform: rotate(15deg) scale(1.1);
+  transition: .2s;
+}
+
+.hover-green{
+  transform: rotate(90deg) scale(1.1);
+  transition: .1s;
+}
+
+@keyframes smooth-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.spin-slow {
+  animation: smooth-spin 1.4s linear infinite;
+}

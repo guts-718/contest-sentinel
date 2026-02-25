@@ -27,7 +27,7 @@ export default function Home() {
   {/* HEADER */}
   <div className="flex justify-between items-center mb-6">
     <h1 className="text-3xl font-bold tracking-tight">
-      Contest Agent Dashboard
+      Contest Sentinel
     </h1>
 
     <div className="flex gap-3 items-center">
